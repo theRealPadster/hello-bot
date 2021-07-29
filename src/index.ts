@@ -4,15 +4,15 @@ dotenv.config();
 import Discord from 'discord.js';
 import { fillInName, getRandomArrayItem } from './lib/utils';
 
-const client = new Discord.Client();
-
-const PREFIX = '/';
-
 import COMPLIMENTS from './data/compliments.json';
 import INSULTS from './data/insults.json';
 
 const { COMPLIMENT_USERS, INSULT_USERS } = process.env;
 const COMPLIMENT_USERS_ARR: string[] = COMPLIMENT_USERS ? (JSON.parse(COMPLIMENT_USERS)) : [ 'Sorry, no compliments for $1' ];
+
+const client = new Discord.Client();
+
+const PREFIX = '/';
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
