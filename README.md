@@ -6,5 +6,5 @@ Create a .env file with `CLIENT_TOKEN="yourtoken"`
 
 ## Development
 Run TypeScript watch task and use nodemon to apply changes in real time.
-1. `yarn run watch`
+1. `yarn watch`
 2. `yarn dev`

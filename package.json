@@ -6,9 +6,10 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "build": "tsc -p tsconfig.json",
     "start": "node ./dist/index.js",
-    "dev": "nodemon --inspect ./dist/index.js",
-    "watch": "tsc -p tsconfig.json -w"
+    "watch": "tsc -p tsconfig.json -w",
+    "dev": "nodemon --inspect ./dist/index.js --watch .env"
   },
   "dependencies": {
     "discord.js": "^12.5.3",
