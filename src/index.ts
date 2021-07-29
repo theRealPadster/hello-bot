@@ -2,13 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import Discord from 'discord.js';
-import { fillInName, getRandomArrayItem } from './lib/utils';
-
-import COMPLIMENTS from './data/compliments.json';
-import INSULTS from './data/insults.json';
-
-const { COMPLIMENT_USERS } = process.env;
-const COMPLIMENT_USERS_ARR: string[] = COMPLIMENT_USERS ? (JSON.parse(COMPLIMENT_USERS)) : [ 'Sorry, no compliments for $1' ];
+import { getComplimentOrInsult, checkAndReactToGifs } from './lib/commands';
 
 const client = new Discord.Client();
 
@@ -20,6 +14,10 @@ client.on('ready', () => {
 
 client.on('message', async (msg) => {
 
+  // Sends reply in function, returns true if sent
+  if (checkAndReactToGifs(msg)) return;
+
+  // Abort if message is not a command for the bot
   if (!msg.content.startsWith(PREFIX) || msg.author.bot) return;
 
   const args = msg.content.slice(PREFIX.length).trim().split(' ');
@@ -50,15 +48,6 @@ client.on('message', async (msg) => {
 		msg.channel.send(`Command name: ${command}\nArguments: ${args}`);
 	}
 });
-
-const getComplimentOrInsult = (author: Discord.User) => {
-  // Default to insults if not in compliments list
-  const relevantList = COMPLIMENT_USERS_ARR.includes(author.username) ? COMPLIMENTS : INSULTS;
-
-  let response: string = getRandomArrayItem(relevantList);
-  response = fillInName(response, author);
-  return response;
-};
 
 //make sure this line is the last line
 client.login(process.env.CLIENT_TOKEN);
