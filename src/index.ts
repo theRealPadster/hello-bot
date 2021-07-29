@@ -7,7 +7,7 @@ import { fillInName, getRandomArrayItem } from './lib/utils';
 import COMPLIMENTS from './data/compliments.json';
 import INSULTS from './data/insults.json';
 
-const { COMPLIMENT_USERS, INSULT_USERS } = process.env;
+const { COMPLIMENT_USERS } = process.env;
 const COMPLIMENT_USERS_ARR: string[] = COMPLIMENT_USERS ? (JSON.parse(COMPLIMENT_USERS)) : [ 'Sorry, no compliments for $1' ];
 
 const client = new Discord.Client();
