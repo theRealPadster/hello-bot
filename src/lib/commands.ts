@@ -1,6 +1,9 @@
 // TODO: can I just grab the types?
 import Discord from 'discord.js'
 
+import AdventureGame from './adventure';
+const adventureGame = new AdventureGame();
+
 import { fillInName, getRandomArrayItem } from './utils';
 
 import COMPLIMENTS from '../data/compliments.json';
@@ -33,4 +36,9 @@ export const checkAndReactToGifs = (msg: Discord.Message) => {
   } else {
     return false;
   }
+};
+
+export const handleAdventure = (user: Discord.User, action: string) => {
+  const response = adventureGame.go(user.id, action);
+  return response;
 };
