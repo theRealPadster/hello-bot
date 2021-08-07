@@ -46,11 +46,7 @@ client.on('message', async (msg) => {
 		}
 
 		msg.channel.send(`Command name: ${command}\nArguments: ${args}`);
-	} // choose your own adventure game
-  else if (command === 'g') {
-    const response = handleAdventure(msg.author, msg.content);
-    msg.channel.send(`${msg.author}: ${response}`);
-  }
+	}
 });
 
 //make sure this line is the last line
