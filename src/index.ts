@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import Discord from 'discord.js';
-import { getComplimentOrInsult, checkAndReactToGifs, handleAdventure } from './lib/commands';
+import { getComplimentOrInsult, checkAndReactToGifs } from './lib/commands';
 
 const client = new Discord.Client();
 
