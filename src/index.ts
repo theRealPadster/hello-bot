@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import Discord from 'discord.js';
-import { getComplimentOrInsult, checkAndReactToGifs } from './lib/commands';
+import { getComplimentOrInsult, checkAndReactToGifs, eject } from './lib/commands';
 
 const client = new Discord.Client();
 
@@ -39,6 +39,11 @@ client.on('message', async (msg) => {
     const user = msg.mentions.users.first() || msg.author;
     const response = getComplimentOrInsult(user);
     msg.channel.send(response);
+  }	// /eject
+  else if (command === 'eject') {
+    // Use mentioned user or the author if none
+    const user = msg.mentions.users.first() || msg.author;
+    eject(user, msg.channel as Discord.TextChannel);
   }	// /args-info
   else if (command === 'args-info') {
 		if (!args.length) {
