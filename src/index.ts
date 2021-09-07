@@ -43,7 +43,7 @@ client.on('message', async (msg) => {
   else if (command === 'eject') {
     // Use mentioned user or the author if none
     const user = msg.mentions.users.first() || msg.author;
-    eject(user, msg.channel as Discord.TextChannel);
+    eject(user, msg);
   }	// /args-info
   else if (command === 'args-info') {
 		if (!args.length) {

@@ -1,7 +1,12 @@
 // TODO: can I just grab the types?
 import Discord from 'discord.js'
 
-import { fillInName, getRandomArrayItem } from './utils';
+import {
+  fillInName,
+  getRandomArrayItem,
+  getAuthorDisplayName,
+  generateGif
+} from './utils';
 
 import COMPLIMENTS from '../data/compliments.json';
 import INSULTS from '../data/insults.json';
@@ -43,12 +48,17 @@ export const checkAndReactToGifs = (msg: Discord.Message) => {
 /**
  * Eject a user
  * @param user User to eject
- * @param channel Text channel to send message in
+ * @param msg Source message to grab guild, display name, etc from
  */
-export const eject = (user: Discord.User, channel: Discord.TextChannel) => {
-  const response = fillInName('$1 has been ejected', user);
-  const attachment = new Discord.MessageAttachment('https://c.tenor.com/4yWg64DBO1AAAAAC/littlebigwhale-among-us.gif');
-  channel.send(attachment);
-  channel.send(response);
+export const eject = async (user: Discord.User, msg: Discord.Message) => {
+  const nick = await getAuthorDisplayName(user, msg);
+  const response = '$1 has been ejected'.replace('$1', nick);
+
+  const gifStream = generateGif(response);
+  const attachment = new Discord.MessageAttachment(gifStream, 'eject.gif');
+  // const attachment = new Discord.MessageAttachment('https://c.tenor.com/4yWg64DBO1AAAAAC/littlebigwhale-among-us.gif');
+
+  msg.channel.send(attachment);
+  msg.channel.send(response);
   return true;
 };
